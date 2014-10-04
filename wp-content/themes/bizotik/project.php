@@ -1,42 +1,57 @@
 <?php
 /*Template Name: Project*/
  ?>
- <?php get_header(); ?>
- <div class="inner-ban">
+ <?php get_header(); $bid=get_the_ID(); ?>
+ <div class="inner-ban" style="background-image:url(<?php echo get_field('banner_image',$bid) ?>);">
   <div class="container">
-    <h2> Projects</h2>
+    <h2><?php the_title(); ?></h2>
   </div>
 </div>
 <!-- Content -->
 <div class="white">
   <div class="container inner-content">
+
+  <?php $projects = query_posts(
+                                    array( 'post_type' => 'project',
+                                            'posts_per_page' => -1,
+                                            'orderby'=>'menu_order',
+                                            'order'=>'ASC')); ?>
+                 <?php foreach ($projects as $project) { ?>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-      <div class="project-block"> <a href="images/projects/01.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/01.jpg" class="img-responsive" /></a> <a href="images/projects/01-1.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/01.jpg" class="img-responsive" /></a> <a href="images/projects/01-2.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/01.jpg" class="img-responsive" /></a> <a href="images/projects/01-3.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/01.jpg" class="img-responsive" /></a>
-        <div class="caption"> <a class="new-box" href=""><span class="new-label">Ongoing</span> </a>
-          <h2 class="title"> Project Name #1</h2>
-          <p> Aenean nonummy hendrerit mauris. Phasellus porta. Fusce scipit varius mi. Cum sociis
-            natoque penatibus et magnis dis partnt montes, nascetur ridiculus mus. Nulla dui.</p>
-          <a href="images/projects/01.jpg" data-imagelightbox="f" class="link">View Gallery</a> </div>
+      <div class="project-block">
+       <?php 
+     	$id =$project->ID;
+             foreach( get_cfc_meta('project_gallery',$id) as $key => $value ){          
+              $image=wp_get_attachment_image_src( $value['gallery_images'], 'thumb' );
+              ?>    
+      <a href="<?php echo $image[0]; ?>" data-imagelightbox="f"> <img alt="" src="<?php echo $image[0]; ?>" class="img-responsive" /></a> 
+         <?php
+          }
+         ?> 
+        <div class="caption"><?php if(get_field("work_progress", $project->ID)=="ongoing") {?> <a class="new-box" href=""><span class="new-label">Ongoing</span> </a><?php }?>
+          <h2 class="title"><?php echo get_the_title( $project->ID ); ?></h2>
+           <?php $content=get_the_content_by_id($project->ID); ?>
+    	
+          <p><?php echo $content; ?> </p>
+          Photos : 
+            <?php 
+            $i=1;
+     		$id =$project->ID;
+             foreach( get_cfc_meta('project_gallery',$id) as $key => $value ){  
+             if($i==1)    
+             {    
+              $image=wp_get_attachment_image_src( $value['gallery_images'], 'thumb' );
+              $count=count(get_cfc_meta('project_gallery',$id));
+              echo $count;
+              ?>
+              </p>  
+          <a href="<?php echo $image[0]; ?>" data-imagelightbox="f" class="link">View Gallery</a> 
+          <?php $i++; }}?>
+          </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-      <div class="project-block"> <a href="images/projects/02.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/02.jpg" class="img-responsive" /></a>
-        <div class="caption">
-          <h2 class="title"> Project Name #2</h2>
-          <p> Aenean nonummy hendrerit mauris. Phasellus porta. Fusce scipit varius mi. Cum sociis
-            natoque penatibus et magnis dis partnt montes, nascetur ridiculus mus. Nulla dui.</p>
-          <a href="images/projects/02.jpg" data-imagelightbox="f" class="link">View Gallery</a> </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-      <div class="project-block"> <a href="images/projects/03.jpg" data-imagelightbox="f"> <img alt="" src="images/projects/03.jpg" class="img-responsive" /></a>
-        <div class="caption">
-          <h2 class="title"> Project Name #3</h2>
-          <p> Aenean nonummy hendrerit mauris. Phasellus porta. Fusce scipit varius mi. Cum sociis
-            natoque penatibus et magnis dis partnt montes, nascetur ridiculus mus. Nulla dui.</p>
-          <a href="images/projects/03.jpg" data-imagelightbox="f" class="link">View Gallery</a> </div>
-      </div>
-    </div>
+   <?php } ?>
+    
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 

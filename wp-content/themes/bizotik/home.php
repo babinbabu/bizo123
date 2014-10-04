@@ -28,7 +28,7 @@
   <div class="container">
     <div class="head-product clearfix">
       <h2>Latest Products</h2>
-      <h3><a href="">All Products</a></h3>
+      <h3><a href="<?php echo get_permalink(7);?>">All Products</a></h3>
     </div>
     <div class="row">
     <?php 
@@ -77,20 +77,30 @@
     <div class="col-md-3">
       <h2 class="title">Latest News</h2>
       <ul class="news">
-        <li> <span>20 Sep 2014</span>
-          <p> Bizotik took polycoat stones adhesive distribution in kerala</p>
-        </li>
-        <li> <span>04 Sep 2014</span>
-          <p> Bizotik took polycoat stones adhesive distribution in kerala</p>
-        </li>
+      <?php 
+      $n=0;
+      $newses = query_posts(
+                                    array( 'post_type' => 'news',
+                                            'posts_per_page' => -1,
+                                            'orderby'=>'menu_order',
+                                            'order'=>'ASC')); ?>
+                 <?php foreach ($newses as $news) { 
+
+                 	if($n<2)
+                 	$day =substr("$news->post_date",0,10)  ; ?>
+       <a href='<?php echo get_permalink(73)."#".$news->ID;?>'> <li> <span><?php echo date("d-M-Y",strtotime($day));?></span>
+          <p><?php echo get_the_title( $news->ID ); ?></p>
+        </li></a>
+	<?php }?>
       </ul>
     </div>
     <div class="col-md-3">
       <div class="download">
         <h2>Download Our <br>
           Brochure</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vulputate vehicula tellus ac porttitor. Vivamus lobortis a lorem ac dapibus.</p>
-        <a href="" target="_blank">Download Now</a> </div>
+          <?php $content=get_the_content_by_id(5); ?>
+        <p><?php echo $content; ?></p>
+        <a href="<?php echo get_field("select_brochure", 5); ?>" target="_blank">Download Now</a> </div>
     </div>
   </div>
 </div>

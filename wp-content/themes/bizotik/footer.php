@@ -3,12 +3,12 @@
   <div class="container">
     <div class="col-md-6">
       <ul class="footer-nav clearfix">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About us</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contactus.html">Contact Us</a></li>
-        <li><a href="quote.html">Request a Quote</a></li>
+        <li><a href="<?php echo get_permalink(5);?>">Home</a></li>
+        <li><a href="<?php echo get_permalink(9);?>">About us</a></li>
+        <li><a href="<?php echo get_permalink(7);?>">Products</a></li>
+        <li><a href="<?php echo get_permalink(11);?>">Projects</a></li>
+        <li><a href="<?php echo get_permalink(13);?>">Contact Us</a></li>
+        <li><a href="<?php echo get_permalink(15);?>">Request a Quote</a></li>
       </ul>
       <p class="copyright">&copy; 2014 Bizotik. All Rights Reserved.</p>
     </div>

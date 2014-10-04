@@ -1,10 +1,11 @@
 <?php 
 /*Template Name: Contact Us */
 ?>
-<?php get_header(); ?>
-<div class="inner-ban">
+<?php get_header();
+$bid=get_the_ID(); ?>
+<div class="inner-ban" style="background-image:url(<?php echo get_field('banner_image',$bid) ?>);">
   <div class="container">
-    <h2>Contact Us</h2>
+    <h2><?php the_title(); ?></h2>
   </div>
 </div>
 
@@ -14,17 +15,13 @@
     <div class="col-md-5">
       <div class="info">
         <h3> Address </h3>
-        <p> <strong>BIZOTIK STONES</strong> <br>
-          Room No: 8/307, <br>
-          Corporation Office Road, Near Post Office, <br>
-          Calicut-673032</p>
+        <p> <?php echo get_field("address", 13); ?></p>
         <h3 class="btop"> Telephones</h3>
-        <p> 0495 2766050</p>
+        <p> <?php echo get_field("telephone", 13); ?></p>
         <h3 class="btop"> Mobile</h3>
-        <p> 9895868628<br>
-          9947173529 </p>
+        <p> <?php echo get_field("mobile_number", 13); ?> </p>
         <h3 class="btop"> Email Id</h3>
-        <p> <a href="mailto:info@bizotik.com">info@bizotik.com</a></p>
+        <p> <a href="mailto:<?php echo get_field("email_id", 13); ?>"><?php echo get_field("email_id", 13); ?></a></p>
       </div>
     </div>
     <div class="col-md-7">

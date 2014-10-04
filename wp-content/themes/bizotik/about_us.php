@@ -1,10 +1,13 @@
 <?php 
 /*Template Name: About-us*/
 ?>
-<?php get_header(); ?>
-<div class="inner-ban">
+<?php get_header(); 
+$bid=get_the_ID();
+?>
+
+<div class="inner-ban" style="background-image:url(<?php echo get_field('banner_image',$bid) ?>);">
   <div class="container">
-    <h2>About Us</h2>
+    <h2><?php the_title(); ?></h2>
   </div>
 </div>
 

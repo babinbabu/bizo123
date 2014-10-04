@@ -20,13 +20,14 @@
     <![endif]-->
 </head>
 <body>
+<?php $id=get_the_ID(); ?>
 <div class="header">
   <div class="container">
-    <div class="col-md-2 col-sm-6 logo"> <a href="index.html"><img src="images/logo.png" alt="Bizotik" /></a> </div>
+    <div class="col-md-2 col-sm-6 logo"> <a href="<?php echo get_permalink(5);?>"><img src="images/logo.png" alt="Bizotik" /></a> </div>
     <div class="col-md-4 col-md-offset-6 col-sm-6 hidden-xs">
       <div class="contact-head">
-        <h3>Get in Touch <span>0495 2766050</span></h3>
-        <h4><a href="mailto:">info@bizotik.com</a></h4>
+        <h3>Get in Touch <span> <?php echo get_field("telephone", 13); ?></span></h3>
+        <h4><a href="mailto:<?php echo get_field("email_id", 13); ?>"><?php echo get_field("email_id", 13); ?></a></h4>
       </div>
     </div>
   </div>
@@ -39,12 +40,12 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About us</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contactus.html">Contact Us</a></li>
-        <li><a href="quote.html">Request a Quote</a></li>
+        <li <?php if($id==5) echo "class='active'"; ?>><a href="<?php echo get_permalink(5);?>">Home</a></li>
+        <li <?php if($id==9) echo "class='active'"; ?>><a href="<?php echo get_permalink(9);?>">About us</a></li>
+        <li <?php if($id==7) echo "class='active'"; ?>><a href="<?php echo get_permalink(7);?>">Products</a></li>
+        <li <?php if($id==11) echo "class='active'"; ?>><a href="<?php echo get_permalink(11);?>">Projects</a></li>
+        <li <?php if($id==13) echo "class='active'"; ?>><a href="<?php echo get_permalink(13);?>">Contact Us</a></li>
+        <li <?php if($id==15) echo "class='active'"; ?>><a href="<?php echo get_permalink(15);?>">Request a Quote</a></li>
       </ul>
     </div>
     <!--/.nav-collapse --> 
